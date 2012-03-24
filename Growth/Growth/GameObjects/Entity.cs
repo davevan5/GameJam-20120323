@@ -7,8 +7,28 @@ namespace Growth.GameObjects
     public abstract class Entity
     {
         public Sprite Sprite;
-        public Vector2 Position;
-        public float Rotation;
+        
+        private Vector2 position;
+        public Vector2 Position
+        {
+            get { return position; }
+            set
+            {            	
+                position = value;
+                Sprite.Position = value;
+            }
+        }
+
+        private float rotation;
+        public float Rotation
+        {
+            get { return rotation; }
+            set
+            {
+                this.rotation = value;
+                Sprite.Rotation = value;
+            }
+        }
 
         public Entity(Sprite sprite)
         {

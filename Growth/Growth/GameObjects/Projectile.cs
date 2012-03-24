@@ -31,8 +31,7 @@ namespace Growth.GameObjects
 
         public void Move(double dt)
         {
-            Sprite.Position = Position += Velocity * (float)dt;
-            Sprite.Rotation = Rotation;
+            Position += Velocity * (float)dt;            
         }
 
         public void SetDirection(Vector2 direction)

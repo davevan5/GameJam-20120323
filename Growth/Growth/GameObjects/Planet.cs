@@ -13,8 +13,7 @@ namespace Growth.GameObjects
         { }
 
         public override void Update(double dt)
-        {
-            Position = Sprite.Position = Position;
+        {            
         }
     }
 }

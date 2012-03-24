@@ -32,10 +32,7 @@ namespace Growth.GameObjects
         public override void Update(double dt)
         {
             Move(dt);
-            SetFacing(GetMouseDirection());
-
-            Sprite.Position = Position;
-            Sprite.Rotation = Rotation;
+            SetFacing(GetMouseDirection());            
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed
                 && timeSinceLastFire > (1f / RateOfFire))

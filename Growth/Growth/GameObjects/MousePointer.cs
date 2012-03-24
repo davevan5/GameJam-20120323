@@ -17,10 +17,7 @@ namespace Growth.GameObjects
 
         public override void Update(double dt)
         {
-            Position = mouseInput.GetMouseWorldPosition();
-
-            Sprite.Position = Position;
-            Sprite.Rotation = Rotation;
+            Position = mouseInput.GetMouseWorldPosition();            
         }
     }
 }
