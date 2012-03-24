@@ -32,7 +32,7 @@ namespace Growth.Rendering
             Matricies.GetWorldToViewMatrix(graphics.Viewport, out matrix);
 
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, matrix);
-            spriteBatch.Draw(Ship.Texture, Ship.Position, null, Color.White, 0f, Vector2.Zero, 1 / texturePixelsPerUnit, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Ship.Texture, Ship.Position, null, Color.White, Ship.Rotation, Vector2.Zero, 1 / texturePixelsPerUnit, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
     }
