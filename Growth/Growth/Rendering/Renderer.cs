@@ -32,8 +32,7 @@ namespace Growth.Rendering
             float smallestDimension = Math.Min(graphics.Viewport.Width, graphics.Viewport.Height);
             float screenPixelsPerUnit = smallestDimension / smallestSqaureUnitSize;
 
-            Matrix result = Matrix.Identity;
-            result = Matrix.CreateScale(1f / texturePixelsPerUnit);
+            Matrix result = Matrix.Identity;            
             result *= Matrix.CreateScale(screenPixelsPerUnit);
             result *= Matrix.CreateTranslation(new Vector3(graphics.Viewport.Width / 2f, graphics.Viewport.Height / 2f, 0));
             matrix = result;
@@ -48,7 +47,7 @@ namespace Growth.Rendering
             WorldToViewMatrix(out matrix);
 
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, matrix);
-            spriteBatch.Draw(Ship.Texture, Ship.Position, Color.White);
+            spriteBatch.Draw(Ship.Texture, Ship.Position, null, Color.White, 0f, Vector2.Zero, 1 / 32f, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
     }
