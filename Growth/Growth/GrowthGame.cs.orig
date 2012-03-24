@@ -45,7 +45,11 @@ namespace Growth
 
             renderer = new Renderer(GraphicsDevice);
 
+<<<<<<< Updated upstream
+            ship = new Ship();
+=======
             ship = new Ship();            
+>>>>>>> Stashed changes
             ship.Texture = Content.Load<Texture2D>("Sprites\\Ship");
             renderer.Ship = ship;
         }
