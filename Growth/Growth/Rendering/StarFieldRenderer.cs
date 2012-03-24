@@ -126,7 +126,7 @@ namespace Growth.Rendering
 
             RenderStarFieldPlane(furthestField, position, 0.5f);
             RenderStarFieldPlane(middleField, position, 0.75f);
-            RenderStarFieldPlane(nearField, position, 1f);
+            RenderStarFieldPlane(nearField, position, 0.9f);
 
             spriteBatch.End();
         }
