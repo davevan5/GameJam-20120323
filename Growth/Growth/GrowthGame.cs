@@ -21,6 +21,7 @@ namespace Growth
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Renderer renderer;
+        Ship ship;
 
         public GrowthGame()
         {
@@ -44,7 +45,8 @@ namespace Growth
 
             renderer = new Renderer(GraphicsDevice);
 
-            Ship ship = new Ship();
+            ship = new Ship();
+            ship.Velocity = Vector2.UnitX * 200;
             ship.Texture = Content.Load<Texture2D>("Sprites\\Ship");
             renderer.Ship = ship;
         }
@@ -60,7 +62,8 @@ namespace Growth
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here            
+            // TODO: Add your update logic here
+            ship.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
         }

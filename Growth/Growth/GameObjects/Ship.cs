@@ -12,7 +12,7 @@ namespace Growth.GameObjects
 
         public void Update(double dt)
         {
-            Position = Velocity * (float)dt;
+            Position += Velocity * (float)dt;
         }
     }
 }
