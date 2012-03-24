@@ -25,6 +25,7 @@ namespace Growth
         Renderer renderer;
         MouseWorldInput mouseInput;
         CameraStack cameraStack;
+        StarFieldRenderer starFieldRenderer;
         Ship ship;
         Crosshair crosshair;
 
@@ -43,11 +44,25 @@ namespace Growth
             base.Initialize();
         }
 
+        private Texture2D[] LoadStarTextures()
+        {
+            return new Texture2D[]
+            {
+                Content.Load<Texture2D>("Sprites\\star01"),
+                Content.Load<Texture2D>("Sprites\\star02"),
+                Content.Load<Texture2D>("Sprites\\star03"),
+                Content.Load<Texture2D>("Sprites\\star04"),
+                Content.Load<Texture2D>("Sprites\\star05")
+            };
+        }
+
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cameraStack = new CameraStack(new NullCamera(GraphicsDevice));
+            cameraStack = new CameraStack(new NullCamera(GraphicsDevice));            
+
+            starFieldRenderer = new StarFieldRenderer(GraphicsDevice, cameraStack, LoadStarTextures());
             renderer = new Renderer(GraphicsDevice, cameraStack);
 
             mouseInput = new MouseWorldInput(GraphicsDevice, cameraStack);
@@ -85,6 +100,7 @@ namespace Growth
         {
             GraphicsDevice.Clear(Color.Black);
 
+            starFieldRenderer.Render();
             renderer.Render();
 
             base.Draw(gameTime);

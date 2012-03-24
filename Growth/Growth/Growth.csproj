@@ -123,6 +123,7 @@
     <Compile Include="GameObjects\Ship.cs" />
     <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\Sprite.cs" />
+    <Compile Include="Rendering\StarFieldRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
