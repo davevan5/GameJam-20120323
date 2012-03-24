@@ -13,11 +13,9 @@ namespace Growth.Rendering
     {
         private readonly CameraStack cameraStack;
         const float texturePixelsPerUnit = 32;
-        const float textureWorldScale = 1 / texturePixelsPerUnit;
 
         private readonly GraphicsDevice graphics;
         private readonly SpriteBatch spriteBatch;
-        private readonly List<Sprite> sprites;
 
         public Renderer(GraphicsDevice graphics, CameraStack cameraStack)
         {
@@ -29,32 +27,29 @@ namespace Growth.Rendering
             this.cameraStack = cameraStack;
             this.graphics = graphics;
             this.spriteBatch = new SpriteBatch(graphics);
-            this.sprites = new List<Sprite>();
         }
 
-        public void AddSprite(Sprite newSprite)
-        {
-            this.sprites.Add(newSprite);
-        }
-
-        public void ClearSprites()
-        {
-            this.sprites.Clear();
-        }
+        public Ship Ship { get; set; }
+        public Crosshair Crosshair { get; set; }
 
         public void Render()
         {
-            if (this.sprites.Count == 0)
+            if (Ship == null)
                 return;
 
+<<<<<<< Updated upstream
             Matrix matrix = cameraStack.Current.GetViewMatrix();            
+=======
+            if (Crosshair == null)
+                return;
+
+            Matrix matrix;
+            Matricies.GetWorldToViewMatrix(graphics.Viewport, out matrix);
+>>>>>>> Stashed changes
 
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, matrix);
-            for (int i = 0; i < sprites.Count; i++)
-            {
-                spriteBatch.Draw(sprites[i].Texture, sprites[i].Position, null, Color.White, sprites[i].Rotation, sprites[i].Origin, textureWorldScale, SpriteEffects.None, 0f);
-            }
-
+            spriteBatch.Draw(Ship.Texture, Ship.Position, null, Color.White, Ship.Rotation, Ship.Origin, 1 / texturePixelsPerUnit, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Crosshair.Texture, Crosshair.Position, null, Color.White, Crosshair.Rotation, Vector2.Zero, 1 / texturePixelsPerUnit, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
     }

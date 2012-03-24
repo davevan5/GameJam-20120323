@@ -26,6 +26,7 @@ namespace Growth
         MouseWorldInput mouseInput;
         CameraStack cameraStack;
         Ship ship;
+        Crosshair crosshair;
 
         public GrowthGame()
         {
@@ -51,10 +52,14 @@ namespace Growth
 
             mouseInput = new MouseWorldInput(GraphicsDevice, cameraStack);
 
-            ship = new Ship();            
-            ship.Texture = Content.Load<Texture2D>("Sprites\\Ship");
+            Sprite shipSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Ship"), new Vector2(16f, 16f));
+            ship = new Ship(shipSprite, mouseInput);
+
+            Sprite crossSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Cross"), new Vector2(16f, 16f));
+            crosshair = new Crosshair(crossSprite, mouseInput);
             
-            renderer.Ship = ship;
+            renderer.AddSprite(ship.Sprite);
+            renderer.AddSprite(crosshair.Sprite);
             cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = ship });            
         }
 
@@ -70,7 +75,8 @@ namespace Growth
                 this.Exit();
             
             cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);            
-            ship.Update(gameTime.ElapsedGameTime.TotalSeconds, mouseInput);
+            ship.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            crosshair.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
         }

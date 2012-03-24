@@ -11,16 +11,26 @@ namespace Growth.GameObjects
         private const float AccelerationSpeed = 80f;
         private const float DragFactor = 0.95f;
 
-        public Vector2 Origin = new Vector2(16f, 16f);
+        private MouseWorldInput mouseInput;
+
         public Vector2 Velocity;
         public Vector2 Acceleration;
         public int Shield;
         public int Health;
 
-        public void Update(double dt, MouseWorldInput mouseInput)
+        public Ship(Sprite sprite, MouseWorldInput mouseInput)
+            : base(sprite)
+        {
+            this.mouseInput = mouseInput;
+        }
+
+        public override void Update(double dt)
         {
             Move(dt);
-            SetFacing(mouseInput.GetMouseWorldPosition());            
+            SetFacing(mouseInput.GetMouseWorldPosition());
+
+            Sprite.Position = Position;
+            Sprite.Rotation = Rotation;
         }
 
         private void Move(double dt)

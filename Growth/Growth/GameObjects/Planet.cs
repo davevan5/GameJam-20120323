@@ -8,7 +8,11 @@ namespace Growth.GameObjects
     {
         public int Health;
 
-        public void Update(double dt)
+        public Planet(Sprite sprite)
+            : base(sprite)
+        { }
+
+        public override void Update(double dt)
         {
         }
     }

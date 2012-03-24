@@ -9,7 +9,11 @@ namespace Growth.GameObjects
         public Vector2 Velocity;
         public int Health;
 
-        public void Update(double dt)
+        public Asteroid(Sprite sprite)
+            : base(sprite)
+        { }
+
+        public override void Update(double dt)
         {
         }
     }

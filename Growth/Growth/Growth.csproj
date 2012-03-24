@@ -112,6 +112,7 @@
     <Compile Include="Cameras\FollowCamera.cs" />
     <Compile Include="Cameras\NullCamera.cs" />
     <Compile Include="GameObjects\Asteroid.cs" />
+    <Compile Include="GameObjects\Crosshair.cs" />
     <Compile Include="GameObjects\Entity.cs" />
     <Compile Include="GameObjects\Planet.cs" />
     <Compile Include="Input\MouseWorldInput.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="GrowthGame.cs" />
     <Compile Include="GameObjects\Ship.cs" />
     <Compile Include="Rendering\Renderer.cs" />
+    <Compile Include="Rendering\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

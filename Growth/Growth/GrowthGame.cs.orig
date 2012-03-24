@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Growth.Rendering;
 using Growth.GameObjects;
+using Growth.Input;
+using Growth.Cameras;
 
 namespace Growth
 {
@@ -21,7 +23,10 @@ namespace Growth
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Renderer renderer;
+        MouseWorldInput mouseInput;
+        CameraStack cameraStack;
         Ship ship;
+        Crosshair crosshair;
 
         public GrowthGame()
         {
@@ -42,16 +47,23 @@ namespace Growth
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            cameraStack = new CameraStack(new NullCamera(GraphicsDevice));
+            renderer = new Renderer(GraphicsDevice, cameraStack);
 
-            renderer = new Renderer(GraphicsDevice);
+            mouseInput = new MouseWorldInput(GraphicsDevice, cameraStack);
 
-<<<<<<< Updated upstream
-            ship = new Ship();
-=======
             ship = new Ship();            
->>>>>>> Stashed changes
             ship.Texture = Content.Load<Texture2D>("Sprites\\Ship");
+
+            crosshair = new Crosshair();
+            crosshair.Texture = Content.Load<Texture2D>("Sprites\\Ship");
+            
             renderer.Ship = ship;
+<<<<<<< Updated upstream
+            cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = ship });            
+=======
+            renderer.Crosshair = crosshair;
+>>>>>>> Stashed changes
         }
 
         protected override void UnloadContent()
@@ -64,33 +76,17 @@ namespace Growth
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
-            KeyboardState keyboardState = Keyboard.GetState();
-            Vector2 movement = new Vector2();
-
-            // TODO: Add your update logic here
-            if (keyboardState.IsKeyDown(Keys.W))
-                movement -= Vector2.UnitY;
-            else if (keyboardState.IsKeyDown(Keys.S))
-                movement += Vector2.UnitY;
-
-            if (keyboardState.IsKeyDown(Keys.A))
-                movement -= Vector2.UnitX;
-            else if (keyboardState.IsKeyDown(Keys.D))
-                movement += Vector2.UnitX;
-
-            if (movement != Vector2.Zero)
-                movement.Normalize();
-
-            ship.Velocity = movement * 20;
-            ship.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            
+            cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);            
+            ship.Update(gameTime.ElapsedGameTime.TotalSeconds, mouseInput);
+            crosshair.Update(gameTime.ElapsedGameTime.TotalSeconds, mouseInput);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             renderer.Render();
 
