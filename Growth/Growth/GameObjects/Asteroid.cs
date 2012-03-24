@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Growth
+namespace Growth.GameObjects
 {
     public class Asteroid : Entity
     {
