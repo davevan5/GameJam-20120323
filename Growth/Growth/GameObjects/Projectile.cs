@@ -10,7 +10,10 @@ namespace Growth.GameObjects
     {
         private const float DragFactor = 0.98f;
         private const float Speed = 50f;
+        private const double Lifespan = 1;
+        private double timeAlive;
         public Vector2 Velocity;
+        public bool DoDispose;
 
         public Projectile(Sprite sprite)
             : base(sprite)
@@ -21,6 +24,9 @@ namespace Growth.GameObjects
         public override void Update(double dt)
         {
             Move(dt);
+            timeAlive += dt;
+            if (timeAlive >= Lifespan)
+                OnDestroyed();
         }
 
         public void Move(double dt)

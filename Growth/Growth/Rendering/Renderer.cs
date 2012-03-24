@@ -57,5 +57,10 @@ namespace Growth.Rendering
 
             spriteBatch.End();
         }
+
+        public void RemoveSprite(Sprite sprite)
+        {
+            sprites.Remove(sprite);
+        }
     }
 }

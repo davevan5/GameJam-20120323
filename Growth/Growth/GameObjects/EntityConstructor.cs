@@ -12,18 +12,17 @@ namespace Growth.GameObjects
     public class EntityConstructor
     {
         private Dictionary<Type, ITemplate> templates;
-        private Renderer renderer;
         private EntityManager entityManager;
 
-        public EntityConstructor(Renderer renderer, EntityManager entityManager, ContentManager content, MouseWorldInput mouseInput)
+        public EntityConstructor(EntityManager entityManager, ContentManager content, MouseWorldInput mouseInput)
         {
-            this.renderer = renderer;
             this.entityManager = entityManager;
 
             templates = new Dictionary<Type, ITemplate>()
             {
                 { typeof(Ship), new ShipTemplate(this, content, mouseInput) },
-                { typeof(Projectile), new ProjectileTemplate(this, content, mouseInput) }
+                { typeof(Projectile), new ProjectileTemplate(this, content, mouseInput) },
+                { typeof(Planet), new PlanetTemplate(this, content, mouseInput) }
             };
         }
 
@@ -38,7 +37,6 @@ namespace Growth.GameObjects
 
             Entity newEntity = template.Make();
             entityManager.AddEntity(newEntity);
-            renderer.AddSprite(newEntity.Sprite);
 
             return newEntity;
         }

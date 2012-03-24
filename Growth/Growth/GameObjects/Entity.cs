@@ -16,5 +16,15 @@ namespace Growth.GameObjects
         }
 
         public abstract void Update(double dt);
+
+        public event EventHandler Destroyed;
+
+        protected virtual void OnDestroyed()
+        {
+            if (Destroyed != null)
+            {
+                Destroyed(this, EventArgs.Empty);
+            }
+        }
     }
 }

@@ -1,18 +1,21 @@
-﻿using Growth.GameObjects;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Growth.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Growth.Input;
 using Microsoft.Xna.Framework;
 
 namespace Growth.GameObjects.Templates
 {
-    public class ShipTemplate : ITemplate
+    public class PlanetTemplate : ITemplate
     {
         private ContentManager content;
         private MouseWorldInput mouseInput;
         private EntityConstructor entityConstructor;
 
-        public ShipTemplate(EntityConstructor entityConstructor, ContentManager content, MouseWorldInput mouseInput)
+        public PlanetTemplate(EntityConstructor entityConstructor, ContentManager content, MouseWorldInput mouseInput)
         {
             this.content = content;
             this.mouseInput = mouseInput;
@@ -21,8 +24,8 @@ namespace Growth.GameObjects.Templates
 
         public Entity Make()
         {
-            Sprite shipSprite = new Sprite(content.Load<Texture2D>("Sprites\\Ship"), new Vector2(16f, 16f));
-            return new Ship(shipSprite, entityConstructor, mouseInput);
+            Sprite planetSprite = new Sprite(content.Load<Texture2D>("Sprites\\Planet"), new Vector2(16f, 16f));
+            return new Planet(planetSprite);
         }
     }
 }
