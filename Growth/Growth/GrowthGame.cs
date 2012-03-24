@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Growth.Rendering;
 
 namespace Growth
 {
@@ -18,6 +19,7 @@ namespace Growth
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Renderer renderer;
 
         public GrowthGame()
         {
@@ -27,7 +29,9 @@ namespace Growth
         
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.ApplyChanges();
 
             base.Initialize();
         }
@@ -37,7 +41,11 @@ namespace Growth
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            renderer = new Renderer(GraphicsDevice);
+
+            Ship ship = new Ship();
+            ship.Texture = Content.Load<Texture2D>("Sprites\\Ship");
+            renderer.Ship = ship;
         }
 
         protected override void UnloadContent()
@@ -51,7 +59,7 @@ namespace Growth
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            // TODO: Add your update logic here            
 
             base.Update(gameTime);
         }
@@ -60,7 +68,7 @@ namespace Growth
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            renderer.Render();
 
             base.Draw(gameTime);
         }
