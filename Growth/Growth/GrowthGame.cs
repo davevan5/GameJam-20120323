@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Growth.Rendering;
 using Growth.GameObjects;
+using Growth.Input;
 
 namespace Growth
 {
@@ -21,6 +22,7 @@ namespace Growth
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Renderer renderer;
+        MouseWorldInput mouseInput;
         Ship ship;
 
         public GrowthGame()
@@ -45,6 +47,8 @@ namespace Growth
 
             renderer = new Renderer(GraphicsDevice);
 
+            mouseInput = new MouseWorldInput(GraphicsDevice);
+
             ship = new Ship();            
             ship.Texture = Content.Load<Texture2D>("Sprites\\Ship");
             
@@ -63,7 +67,7 @@ namespace Growth
                 this.Exit();
 
             
-            ship.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            ship.Update(gameTime.ElapsedGameTime.TotalSeconds, mouseInput);
 
             base.Update(gameTime);
         }
