@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Growth.Rendering;
 using Growth.GameObjects;
 using Growth.Input;
+using Growth.Cameras;
 
 namespace Growth
 {
@@ -23,6 +24,7 @@ namespace Growth
         SpriteBatch spriteBatch;
         Renderer renderer;
         MouseWorldInput mouseInput;
+        CameraStack cameraStack;
         Ship ship;
 
         public GrowthGame()
@@ -44,15 +46,16 @@ namespace Growth
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            cameraStack = new CameraStack(new NullCamera(GraphicsDevice));
+            renderer = new Renderer(GraphicsDevice, cameraStack);
 
-            renderer = new Renderer(GraphicsDevice);
-
-            mouseInput = new MouseWorldInput(GraphicsDevice);
+            mouseInput = new MouseWorldInput(GraphicsDevice, cameraStack);
 
             ship = new Ship();            
             ship.Texture = Content.Load<Texture2D>("Sprites\\Ship");
             
             renderer.Ship = ship;
+            cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = ship });            
         }
 
         protected override void UnloadContent()
@@ -65,8 +68,8 @@ namespace Growth
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
             
+            cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);            
             ship.Update(gameTime.ElapsedGameTime.TotalSeconds, mouseInput);
 
             base.Update(gameTime);
@@ -74,7 +77,7 @@ namespace Growth
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             renderer.Render();
 

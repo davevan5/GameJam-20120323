@@ -107,6 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cameras\Camera.cs" />
+    <Compile Include="Cameras\CameraStack.cs" />
+    <Compile Include="Cameras\FollowCamera.cs" />
+    <Compile Include="Cameras\NullCamera.cs" />
     <Compile Include="GameObjects\Asteroid.cs" />
     <Compile Include="GameObjects\Entity.cs" />
     <Compile Include="GameObjects\Planet.cs" />

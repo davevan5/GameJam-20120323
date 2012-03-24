@@ -5,15 +5,23 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Growth.Cameras;
 
 namespace Growth.Input
 {        
     public class MouseWorldInput
     {
+        private readonly CameraStack cameraStack;
         private readonly GraphicsDevice graphics;
 
-        public MouseWorldInput(GraphicsDevice graphics)
+        public MouseWorldInput(GraphicsDevice graphics, CameraStack cameraStack)
         {
+            if (graphics == null)
+                throw new ArgumentNullException("graphics", "graphics is null.");
+            if (cameraStack == null)
+                throw new ArgumentNullException("cameraStack", "cameraStack is null.");
+
+            this.cameraStack = cameraStack;
             this.graphics = graphics;
         }
 
@@ -24,8 +32,7 @@ namespace Growth.Input
 
             Matrix projection = Matrix.CreateOrthographicOffCenter(0, graphics.Viewport.Width, graphics.Viewport.Height, 0, 0, 1);
 
-            Matrix view;
-            Matricies.GetWorldToViewMatrix(graphics.Viewport, out view);
+            Matrix view = cameraStack.Current.GetViewMatrix();            
 
             Vector3 unprojected = graphics.Viewport.Unproject(screenMousePosition, projection, view, Matrix.Identity);
 
