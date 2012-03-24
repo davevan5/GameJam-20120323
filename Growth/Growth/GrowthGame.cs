@@ -12,6 +12,7 @@ using Growth.Rendering;
 using Growth.GameObjects;
 using Growth.Input;
 using Growth.Cameras;
+using Growth.GameObjects.Templates;
 
 namespace Growth
 {
@@ -21,13 +22,15 @@ namespace Growth
     public class GrowthGame : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        Renderer renderer;
+        SpriteBatch spriteBatch;        
         MouseWorldInput mouseInput;
         CameraStack cameraStack;
         StarFieldRenderer starFieldRenderer;
-        Ship ship;
-        Crosshair crosshair;
+
+
+        Renderer renderer;
+        EntityManager entityManager;
+        EntityConstructor entityContructor;
 
         public GrowthGame()
         {
@@ -64,18 +67,18 @@ namespace Growth
 
             starFieldRenderer = new StarFieldRenderer(GraphicsDevice, cameraStack, LoadStarTextures());
             renderer = new Renderer(GraphicsDevice, cameraStack);
-
             mouseInput = new MouseWorldInput(GraphicsDevice, cameraStack);
+            entityManager = new EntityManager();
+            entityContructor = new EntityConstructor(renderer, entityManager, Content, mouseInput);            
 
-            Sprite shipSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Ship"), new Vector2(16f, 16f));
-            ship = new Ship(shipSprite, mouseInput);
+            Sprite pointerSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Cross"), new Vector2(16f, 16f));
+            MousePointer mousePointer = new MousePointer(pointerSprite, mouseInput);
+            entityManager.AddEntity(mousePointer);
+            renderer.AddSprite(mousePointer.Sprite);
 
-            Sprite crossSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Cross"), new Vector2(16f, 16f));
-            crosshair = new Crosshair(crossSprite, mouseInput);
-            
-            renderer.AddSprite(ship.Sprite);
-            renderer.AddSprite(crosshair.Sprite);
-            cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = ship });            
+            Ship playerShip =  (Ship)entityContructor.MakeEntity(typeof(Ship));
+
+            cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = playerShip });            
         }
 
         protected override void UnloadContent()
@@ -89,9 +92,8 @@ namespace Growth
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             
-            cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);            
-            ship.Update(gameTime.ElapsedGameTime.TotalSeconds);
-            crosshair.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            entityManager.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
         }

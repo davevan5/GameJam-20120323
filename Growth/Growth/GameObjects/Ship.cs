@@ -8,29 +8,51 @@ namespace Growth.GameObjects
 {
     public class Ship : Entity
     {
+        private EntityConstructor entityConstructor;
+        private MouseWorldInput mouseInput;
+        private double timeSinceLastFire;
+
         private const float AccelerationSpeed = 80f;
         private const float DragFactor = 0.95f;
-
-        private MouseWorldInput mouseInput;
+        private const int RateOfFire = 7;
 
         public Vector2 Velocity;
         public Vector2 Acceleration;
         public int Shield;
         public int Health;
+        
 
-        public Ship(Sprite sprite, MouseWorldInput mouseInput)
+        public Ship(Sprite sprite, EntityConstructor entityConstructor, MouseWorldInput mouseInput)
             : base(sprite)
         {
             this.mouseInput = mouseInput;
+            this.entityConstructor = entityConstructor;
         }
 
         public override void Update(double dt)
         {
             Move(dt);
-            SetFacing(mouseInput.GetMouseWorldPosition());
+            SetFacing(GetMouseDirection());
 
             Sprite.Position = Position;
             Sprite.Rotation = Rotation;
+
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed
+                && timeSinceLastFire > (1f / RateOfFire))
+            {
+                FireWeapons(dt);
+            }
+
+            timeSinceLastFire += dt;
+        }
+
+        private void FireWeapons(double dt)
+        {            
+            Projectile projectile = (Projectile)entityConstructor.MakeEntity(typeof(Projectile));
+            projectile.Sprite.Position = projectile.Position = this.Position;
+            projectile.SetDirection(GetMouseDirection());
+
+            timeSinceLastFire = 0;
         }
 
         private void Move(double dt)
@@ -63,11 +85,14 @@ namespace Growth.GameObjects
             return movement;
         }
 
-        private void SetFacing(Vector2 mousePos)
+        private void SetFacing(Vector2 direction)
         {
-            Vector2 distance = Vector2.Zero;
-            distance = mousePos - Position;
-            Rotation = (float)Math.Atan2(distance.Y, distance.X);
+            Rotation = (float)Math.Atan2(direction.Y, direction.X);
+        }
+
+        private Vector2 GetMouseDirection()
+        {
+            return Vector2.Normalize(mouseInput.GetMouseWorldPosition() - Position);
         }
     }
 }

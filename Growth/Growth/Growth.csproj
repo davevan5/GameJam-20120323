@@ -112,9 +112,15 @@
     <Compile Include="Cameras\FollowCamera.cs" />
     <Compile Include="Cameras\NullCamera.cs" />
     <Compile Include="GameObjects\Asteroid.cs" />
-    <Compile Include="GameObjects\Crosshair.cs" />
+    <Compile Include="GameObjects\EntityConstructor.cs" />
+    <Compile Include="GameObjects\EntityManager.cs" />
+    <Compile Include="GameObjects\MousePointer.cs" />
     <Compile Include="GameObjects\Entity.cs" />
     <Compile Include="GameObjects\Planet.cs" />
+    <Compile Include="GameObjects\Projectile.cs" />
+    <Compile Include="GameObjects\Templates\ITemplate.cs" />
+    <Compile Include="GameObjects\Templates\ProjectileTemplate.cs" />
+    <Compile Include="GameObjects\Templates\ShipTemplate.cs" />
     <Compile Include="Input\MouseWorldInput.cs" />
     <Compile Include="Matricies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

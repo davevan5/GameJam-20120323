@@ -5,11 +5,11 @@ using Growth.Input;
 
 namespace Growth.GameObjects
 {
-    public class Crosshair : Entity
+    public class MousePointer : Entity
     {
         private MouseWorldInput mouseInput;
 
-        public Crosshair(Sprite sprite, MouseWorldInput mouseInput)
+        public MousePointer(Sprite sprite, MouseWorldInput mouseInput)
             : base(sprite)
         {
             this.mouseInput = mouseInput;
