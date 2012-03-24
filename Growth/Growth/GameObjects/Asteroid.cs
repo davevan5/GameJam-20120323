@@ -14,6 +14,7 @@ namespace Growth.GameObjects
 
         public override void Update(double dt)
         {
+
         }
     }
 }
