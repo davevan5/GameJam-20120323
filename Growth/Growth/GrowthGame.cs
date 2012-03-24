@@ -47,6 +47,7 @@ namespace Growth
 
             ship = new Ship();            
             ship.Texture = Content.Load<Texture2D>("Sprites\\Ship");
+            
             renderer.Ship = ship;
         }
 
@@ -61,24 +62,7 @@ namespace Growth
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            KeyboardState keyboardState = Keyboard.GetState();
-            Vector2 movement = new Vector2();
-
-            // TODO: Add your update logic here
-            if (keyboardState.IsKeyDown(Keys.W))
-                movement -= Vector2.UnitY;
-            else if (keyboardState.IsKeyDown(Keys.S))
-                movement += Vector2.UnitY;
-
-            if (keyboardState.IsKeyDown(Keys.A))
-                movement -= Vector2.UnitX;
-            else if (keyboardState.IsKeyDown(Keys.D))
-                movement += Vector2.UnitX;
-
-            if (movement != Vector2.Zero)
-                movement.Normalize();
-
-            ship.Velocity = movement * 20;
+            
             ship.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
