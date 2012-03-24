@@ -1,7 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Growth", "Growth\Growth\Growth.csproj", "{6B3A7DB0-A600-4C1E-A594-751974200CFE}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "GrowthContent", "Growth\GrowthContent\GrowthContent.contentproj", "{9179CF40-F75D-4F51-8F28-6521DABFE2AA}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B3A7DB0-A600-4C1E-A594-751974200CFE}.Debug|x86.ActiveCfg = Debug|x86
+		{6B3A7DB0-A600-4C1E-A594-751974200CFE}.Debug|x86.Build.0 = Debug|x86
+		{6B3A7DB0-A600-4C1E-A594-751974200CFE}.Release|x86.ActiveCfg = Release|x86
+		{6B3A7DB0-A600-4C1E-A594-751974200CFE}.Release|x86.Build.0 = Release|x86
+		{9179CF40-F75D-4F51-8F28-6521DABFE2AA}.Debug|x86.ActiveCfg = Debug|x86
+		{9179CF40-F75D-4F51-8F28-6521DABFE2AA}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
