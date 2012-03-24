@@ -44,9 +44,9 @@ namespace Growth.Rendering
 
         public void GenerateStarFieldPlanes()
         {
-            GenerateStarField(furthestField, 200, 0.5f);
-            GenerateStarField(middleField, 150, 0.75f);
-            GenerateStarField(nearField, 120, 1f);
+            GenerateStarField(furthestField, 100, 0.5f);
+            GenerateStarField(middleField, 75, 0.75f);
+            GenerateStarField(nearField, 50, 1f);
         }
 
         private void GenerateStarField(RenderTarget2D renderTarget, int numberOfStars, float scale)
@@ -64,7 +64,7 @@ namespace Growth.Rendering
                 float y = (float)(random.NextDouble() * (planeDimension.Y - texture.Height)) + (texture.Height / 2f);
 
 
-                spriteBatch.Draw(texture, new Vector2(x, y), Color.White);
+                spriteBatch.Draw(texture, new Vector2(x, y), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             }
 
             spriteBatch.End();
