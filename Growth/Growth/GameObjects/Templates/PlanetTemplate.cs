@@ -24,8 +24,14 @@ namespace Growth.GameObjects.Templates
 
         public Entity Make()
         {
-            Sprite planetSprite = new Sprite(content.Load<Texture2D>("Sprites\\Planet"), new Vector2(16f, 16f));
-            return new Planet(planetSprite);
+            Sprite planetSprite = new Sprite(content.Load<Texture2D>("Sprites\\Planet"), new Vector2(160f, 160f));
+            return new Planet(planetSprite)
+            {
+                CanCollide = true,
+                IsPhysical = true,
+                IsStatic = true,
+                CollisionRadius = 5f
+            };
         }
     }
 }

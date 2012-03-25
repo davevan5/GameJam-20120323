@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Growth.Rendering;
+using Growth.Physics;
 
 namespace Growth.GameObjects
 {
     public class EntityManager
     {
-        private List<Entity> entities;
-        private Renderer renderer;
+        private readonly List<Entity> entities;
+        private readonly PhysicsSimulator physics;
+        private readonly Renderer renderer;
 
-        public EntityManager(Renderer renderer)
+        public EntityManager(PhysicsSimulator physics, Renderer renderer)
         {
+            this.physics = physics;
             entities = new List<Entity>();
             this.renderer = renderer;
         }
@@ -22,6 +25,7 @@ namespace Growth.GameObjects
             entities.Add(entity);
             entity.Destroyed += OnEntityDestroyed;
             renderer.AddSprite(entity.Sprite);
+            physics.AddEntity(entity);
         }
 
         private void OnEntityDestroyed(object sender, EventArgs e)
@@ -29,7 +33,7 @@ namespace Growth.GameObjects
             Entity thisEntity = (Entity)sender;
             renderer.RemoveSprite(thisEntity.Sprite);
             entities.Remove(thisEntity);
-
+            physics.RemoveEntity(thisEntity);
             thisEntity.Destroyed -= OnEntityDestroyed;
         }
 

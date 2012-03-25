@@ -13,6 +13,7 @@ using Growth.GameObjects;
 using Growth.Input;
 using Growth.Cameras;
 using Growth.GameObjects.Templates;
+using Growth.Physics;
 
 namespace Growth
 {
@@ -31,6 +32,7 @@ namespace Growth
         Renderer renderer;
         EntityManager entityManager;
         EntityConstructor entityContructor;
+        PhysicsSimulator physics;
 
         public GrowthGame()
         {
@@ -68,7 +70,8 @@ namespace Growth
             starFieldRenderer = new StarFieldRenderer(GraphicsDevice, cameraStack, LoadStarTextures());
             renderer = new Renderer(GraphicsDevice, cameraStack);
             mouseInput = new MouseWorldInput(GraphicsDevice, cameraStack);
-            entityManager = new EntityManager(renderer);
+            physics = new PhysicsSimulator();
+            entityManager = new EntityManager(physics, renderer);
             entityContructor = new EntityConstructor(entityManager, Content, mouseInput);            
 
             Sprite pointerSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Cross"), new Vector2(16f, 16f));
@@ -78,12 +81,13 @@ namespace Growth
 
             Planet earth = (Planet)entityContructor.MakeEntity(typeof(Planet));
             Ship playerShip =  (Ship)entityContructor.MakeEntity(typeof(Ship));
+            playerShip.Position = new Vector2(20, 20);
             cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = playerShip });            
         }
 
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            starFieldRenderer.Dispose();
         }
 
         protected override void Update(GameTime gameTime)
@@ -94,6 +98,7 @@ namespace Growth
             
             cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);
             entityManager.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            physics.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
         }

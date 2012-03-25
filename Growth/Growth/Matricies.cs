@@ -15,7 +15,7 @@ namespace Growth
 {        
     public static class Matricies
     {
-        const int smallestSqaureUnitSize = 25;
+        const float smallestSqaureUnitSize = 25;
 
         public static void GetWorldToViewMatrix(Viewport viewport, out Matrix matrix)
         {

@@ -12,12 +12,9 @@ namespace Growth.GameObjects
         private MouseWorldInput mouseInput;
         private double timeSinceLastFire;
 
-        private const float AccelerationSpeed = 80f;
-        private const float DragFactor = 0.95f;
+        private const float AccelerationSpeed = 80f;        
         private const int RateOfFire = 7;
 
-        public Vector2 Velocity;
-        public Vector2 Acceleration;
         public int Shield;
         public int Health;
         
@@ -25,6 +22,8 @@ namespace Growth.GameObjects
         public Ship(Sprite sprite, EntityConstructor entityConstructor, MouseWorldInput mouseInput)
             : base(sprite)
         {
+            DragFactor = 0.95f;
+
             this.mouseInput = mouseInput;
             this.entityConstructor = entityConstructor;
         }
@@ -54,11 +53,7 @@ namespace Growth.GameObjects
 
         private void Move(double dt)
         {
-            Acceleration = CalculateMovement() * AccelerationSpeed;
-            Velocity = (Velocity + (Acceleration * (float)dt)) * DragFactor;
-
-            Position += Velocity * (float)dt;
-            Acceleration = Vector2.Zero;
+            Acceleration = CalculateMovement() * AccelerationSpeed;                        
         }
 
         private Vector2 CalculateMovement()

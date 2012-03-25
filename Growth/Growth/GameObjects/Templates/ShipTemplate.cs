@@ -22,7 +22,12 @@ namespace Growth.GameObjects.Templates
         public Entity Make()
         {
             Sprite shipSprite = new Sprite(content.Load<Texture2D>("Sprites\\Ship"), new Vector2(16f, 16f));
-            return new Ship(shipSprite, entityConstructor, mouseInput);
+            return new Ship(shipSprite, entityConstructor, mouseInput)
+            {
+                CanCollide = true,
+                IsPhysical = true,
+                CollisionRadius = 0.6f
+            };
         }
     }
 }

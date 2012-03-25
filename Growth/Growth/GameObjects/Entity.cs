@@ -6,8 +6,25 @@ namespace Growth.GameObjects
 {
     public abstract class Entity
     {
-        public Sprite Sprite;
+        public Sprite Sprite;        
+        public Vector2 Velocity;
+        public Vector2 Acceleration;
+
+        // Collision
+        public float DragFactor;
+        public float CollisionRadius;
+        public bool CanCollide;
+        public bool IsPhysical;
+        public bool IsStatic;
         
+        public Entity(Sprite sprite)
+        {
+            this.Sprite = sprite;
+            this.DragFactor = 1f;
+        }
+
+        public bool IsAlive { get; private set; }
+
         private Vector2 position;
         public Vector2 Position
         {
@@ -28,12 +45,7 @@ namespace Growth.GameObjects
                 this.rotation = value;
                 Sprite.Rotation = value;
             }
-        }
-
-        public Entity(Sprite sprite)
-        {
-            this.Sprite = sprite;
-        }
+        }        
 
         public abstract void Update(double dt);
 
@@ -43,8 +55,13 @@ namespace Growth.GameObjects
         {
             if (Destroyed != null)
             {
+                IsAlive = false;
                 Destroyed(this, EventArgs.Empty);
             }
+        }
+
+        public virtual void CollisionWith(Entity collider)
+        {            
         }
     }
 }

@@ -25,7 +25,13 @@ namespace Growth.GameObjects.Templates
         public Entity Make()
         {
             Sprite projectileSprite = new Sprite(content.Load<Texture2D>("Sprites\\Projectile"), new Vector2(16f, 16f));
-            return new Projectile(projectileSprite);
+            return new Projectile(projectileSprite)
+            {
+                CanCollide = true,
+                IsPhysical = false,
+                IsStatic = false,                
+                CollisionRadius = 0.8f
+            };
         }
     }
 }

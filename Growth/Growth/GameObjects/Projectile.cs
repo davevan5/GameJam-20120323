@@ -7,18 +7,16 @@ using Microsoft.Xna.Framework;
 namespace Growth.GameObjects
 {
     public class Projectile : Entity
-    {
-        private const float DragFactor = 0.98f;
+    {        
         private const float Speed = 50f;
         private const double Lifespan = 1;
-        private double timeAlive;
-        public Vector2 Velocity;
+        private double timeAlive;        
         public bool DoDispose;
 
         public Projectile(Sprite sprite)
             : base(sprite)
         {
-
+            DragFactor = 0.98f;
         }
 
         public override void Update(double dt)
@@ -38,6 +36,16 @@ namespace Growth.GameObjects
         {
             Velocity = direction * Speed;
             Rotation = (float)Math.Atan2(direction.Y, direction.X);
+        }
+
+        public override void CollisionWith(Entity collider)
+        {
+            if (collider is Ship)
+                return;
+
+            OnDestroyed();
+
+            base.CollisionWith(collider);
         }
     }
 }
