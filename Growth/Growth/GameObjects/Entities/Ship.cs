@@ -17,7 +17,7 @@ namespace Growth.GameObjects.Entities
 
         public int Shield;
         public int Health;
-        
+        public int Score;
 
         public Ship(Sprite sprite, EntityConstructor entityConstructor, MouseWorldInput mouseInput)
             : base(sprite)
