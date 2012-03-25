@@ -26,7 +26,8 @@ namespace Growth.GameObjects
                 { typeof(Projectile), new ProjectileTemplate(this, content) },
                 { typeof(Planet), new PlanetTemplate(this, content) },
                 { typeof(Asteroid), new AsteroidTemplate(this, content) },
-                { typeof(Ore), new OreTemplate(this, content) }
+                { typeof(Ore), new OreTemplate(this, content) },
+                { typeof(NpcEnemy), new NpcEnemyTemplate(this, content) },
             };
         }
 

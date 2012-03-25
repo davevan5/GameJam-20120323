@@ -73,6 +73,9 @@ namespace Growth.Physics
                 entities[i].Velocity = new Vector2(
                     Math.Abs(entities[i].Velocity.X) < Epsilon ? 0 : entities[i].Velocity.X,
                     Math.Abs(entities[i].Velocity.Y) < Epsilon ? 0 : entities[i].Velocity.Y);
+
+                if (entities[i].MaxSpeed > 0f && entities[i].Velocity.Length() > entities[i].MaxSpeed)
+                    entities[i].Velocity = Vector2.Normalize(entities[i].Velocity) * entities[i].MaxSpeed;
             }
 
             BroadPhase();

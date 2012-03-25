@@ -114,6 +114,10 @@ namespace Growth
             asteroidField = new AsteroidField(entityContructor);
             asteroidField.MaxCount = 7;
             asteroidField.Position = new Vector2(30, 30);
+
+            NpcEnemy npc = (NpcEnemy)entityContructor.MakeEntity(typeof(NpcEnemy));
+            npc.Target = playerShip;
+            npc.Position = new Vector2(20, 20); ;
         }
 
         private void OnPlayerShipDestroyed(object sender, EventArgs e)
