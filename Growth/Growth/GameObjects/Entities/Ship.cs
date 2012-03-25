@@ -23,7 +23,7 @@ namespace Growth.GameObjects.Entities
         {
             DragFactor = 0.95f;
 
-            Health = 100;
+            Health = 1000;
 
             this.mouseInput = mouseInput;
             this.entityConstructor = entityConstructor;
@@ -86,6 +86,16 @@ namespace Growth.GameObjects.Entities
         private Vector2 GetMouseDirection()
         {
             return Vector2.Normalize(mouseInput.GetMouseWorldPosition() - Position);
+        }
+
+        public override void CollisionWith(Entity collider)
+        {
+            if (collider is NpcEnemy)
+            {
+                Health -= 20;
+            }
+
+            base.CollisionWith(collider);
         }
     }
 }

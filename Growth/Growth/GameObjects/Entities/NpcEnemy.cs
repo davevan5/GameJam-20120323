@@ -56,6 +56,10 @@ namespace Growth.GameObjects.Entities
             {
                 Health -= ((Projectile)collider).Damage;                
             }
+            else if (collider is Ship)
+            {
+                Health -= 20;
+            }
 
             base.CollisionWith(collider);
         }
