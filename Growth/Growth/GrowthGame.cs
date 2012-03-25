@@ -90,6 +90,7 @@ namespace Growth
             cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = playerShip });
 
             Sprite arrowSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Arrow"), new Vector2(16f, 16f));
+            arrowSprite.Tint = Color.Green;
             targetPointer = new TargetPointer(earth, playerShip, arrowSprite);
             renderer.AddSprite(arrowSprite);
 
