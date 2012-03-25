@@ -63,11 +63,11 @@ namespace Growth
         }
 
         protected override void LoadContent()
-        {
+        {            
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cameraStack = new CameraStack(new NullCamera(GraphicsDevice));            
 
+            cameraStack = new CameraStack(new NullCamera(GraphicsDevice));
             starFieldRenderer = new StarFieldRenderer(GraphicsDevice, cameraStack, LoadStarTextures());
             renderer = new Renderer(GraphicsDevice, cameraStack);
             mouseInput = new MouseWorldInput(GraphicsDevice, cameraStack);
@@ -103,10 +103,11 @@ namespace Growth
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             
-            cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            
             entityManager.Update(gameTime.ElapsedGameTime.TotalSeconds);
             physics.Update(gameTime.ElapsedGameTime.TotalSeconds);
             targetPointer.Update();
+            cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
         }
