@@ -120,8 +120,8 @@ namespace Growth
             asteroidField.Position = new Vector2(30, 30);
 
             npcSpawner = new NpcSpawner(entityConstructor, playerShip);
-            npcSpawner.MaxSpawnCount = 50;
-            npcSpawner.RespawnTime = 1;
+            npcSpawner.MaxSpawnCount = 200;
+            npcSpawner.RespawnTime = 0.01;
             npcSpawner.Position = new Vector2(20, 20);
         }
 

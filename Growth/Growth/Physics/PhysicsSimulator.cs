@@ -103,19 +103,32 @@ namespace Growth.Physics
 
                 bool isPhysical = pair.A.IsPhysical && pair.B.IsPhysical;
 
-                if (distance.Length() < pair.A.CollisionRadius + pair.B.CollisionRadius)
-                {
-                    Vector2 collisionNormal = Vector2.Normalize(distance);
+                var length = distance.Length();
+                var maxLength = pair.A.CollisionRadius + pair.B.CollisionRadius;
+
+                if (length < maxLength)
+                {                                                            
                     pair.A.CollisionWith(pair.B);
                     pair.B.CollisionWith(pair.A);
 
                     if (isPhysical)
                     {
+                        Vector2 collisionNormal = Vector2.Normalize(distance);
+
+                        // first push each out
+                        float pushDistance = (maxLength - length) / 2f;
+
                         if (!pair.A.IsStatic)
+                        {
+                            pair.A.Position += pushDistance * collisionNormal;
                             pair.A.Velocity = Vector2.Reflect(pair.A.Velocity, collisionNormal);
+                        }
 
                         if (!pair.B.IsStatic)
+                        {
+                            pair.B.Position += pushDistance * -collisionNormal;
                             pair.B.Velocity = Vector2.Reflect(pair.B.Velocity, -collisionNormal);
+                        }
                     }
                 }
             }
