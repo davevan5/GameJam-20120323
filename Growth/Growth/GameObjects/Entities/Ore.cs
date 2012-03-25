@@ -12,7 +12,7 @@ namespace Growth.GameObjects.Entities
         public Ore(Sprite sprite)
             : base(sprite) 
         {
-
+            DragFactor = 0.95f;
         }
 
         public override void Update(double dt)

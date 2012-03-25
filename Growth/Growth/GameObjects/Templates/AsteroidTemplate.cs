@@ -30,7 +30,7 @@ namespace Growth.GameObjects.Templates
 
             float collisionRadius = (Math.Max(texture.Width, texture.Height) / Renderer.TexturePixelsPerUnit) / 2;
 
-            return new Asteroid(asteroidSprite)
+            return new Asteroid(asteroidSprite, entityConstructor)
             {
                 CanCollide = true,
                 CollisionRadius = collisionRadius,

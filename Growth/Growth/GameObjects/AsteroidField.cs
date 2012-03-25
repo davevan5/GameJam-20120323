@@ -42,13 +42,6 @@ namespace Growth.GameObjects
             Asteroid thisAsteroid = (Asteroid)sender;
             asteroids.Remove(thisAsteroid);
 
-            int maxDropDistance = (int)(thisAsteroid.CollisionRadius * 2);
-            for (int i = 0; i < thisAsteroid.DropCount; i++)
-            {
-                Ore newOre = (Ore)entityContructor.MakeEntity(typeof(Ore));
-                newOre.Position = thisAsteroid.Position + new Vector2(rand.Next(0, maxDropDistance), rand.Next(0, maxDropDistance));
-            }
-
             (thisAsteroid).Destroyed -= OnAsteroidDestroyed;
         }
 
