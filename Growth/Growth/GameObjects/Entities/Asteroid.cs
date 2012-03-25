@@ -6,13 +6,16 @@ namespace Growth.GameObjects.Entities
 {
     public class Asteroid : Entity
     {
+        private static Random rand = new Random();
         private const int maxHealth = 500;
+        public int DropCount;
         public int Health;
 
         public Asteroid(Sprite sprite)
             : base(sprite)
         {
-            Health = 500;
+            Health = maxHealth;
+            DropCount = rand.Next(1, 5);
         }
 
         public override void Update(double dt)

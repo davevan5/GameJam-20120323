@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Growth.GameObjects.Entities;
+using Growth.Rendering;
 
 namespace Growth.GameObjects
 {
@@ -16,7 +17,7 @@ namespace Growth.GameObjects
 
         public int MaxCount;
         public Vector2 Position;
-        private Random rand = new Random();
+        private static Random rand = new Random();
 
         public AsteroidField(EntityConstructor entityContructor) 
         {
@@ -38,8 +39,17 @@ namespace Growth.GameObjects
 
         private void OnAsteroidDestroyed(object sender, EventArgs e)
         {
-            asteroids.Remove((Asteroid)sender);
-            ((Asteroid)sender).Destroyed -= OnAsteroidDestroyed;
+            Asteroid thisAsteroid = (Asteroid)sender;
+            asteroids.Remove(thisAsteroid);
+
+            int maxDropDistance = (int)(thisAsteroid.CollisionRadius * 2);
+            for (int i = 0; i < thisAsteroid.DropCount; i++)
+            {
+                Ore newOre = (Ore)entityContructor.MakeEntity(typeof(Ore));
+                newOre.Position = thisAsteroid.Position + new Vector2(rand.Next(0, maxDropDistance), rand.Next(0, maxDropDistance));
+            }
+
+            (thisAsteroid).Destroyed -= OnAsteroidDestroyed;
         }
 
         public void RespawnAsteroid()

@@ -25,7 +25,7 @@ namespace Growth.GameObjects.Templates
 
         public Entity Make()
         {
-            Texture2D texture = content.Load<Texture2D>("Sprites\\Ore" + rand.Next(1, 3));
+            Texture2D texture = content.Load<Texture2D>("Sprites\\Ore" + rand.Next(1, 4));
             Sprite oreSprite = new Sprite(texture, new Vector2(texture.Width / 2, texture.Height / 2));
 
             float collisionRadius = (Math.Max(texture.Width, texture.Height) / Renderer.TexturePixelsPerUnit) / 2;
