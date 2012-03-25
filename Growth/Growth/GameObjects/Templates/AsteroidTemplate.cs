@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Growth.Input;
+using Growth.Rendering;
 
 namespace Growth.GameObjects.Templates
 {
@@ -27,10 +28,14 @@ namespace Growth.GameObjects.Templates
         {
             Texture2D texture = content.Load<Texture2D>("Sprites\\Asteroid" + rand.Next(1, 3));
             Sprite asteroidSprite = new Sprite(texture, new Vector2(texture.Width / 2, texture.Height / 2));
+
+            float collisionRadius = (Math.Max(texture.Width, texture.Height) / Renderer.TexturePixelsPerUnit) / 2;
+
             return new Asteroid(asteroidSprite)
             {
                 CanCollide = true,
-                CollisionRadius = 0.6f
+                CollisionRadius = collisionRadius,
+                IsPhysical = true
             };
         }
     }

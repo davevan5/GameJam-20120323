@@ -12,8 +12,8 @@ namespace Growth.Rendering
     public class Renderer
     {
         private readonly CameraStack cameraStack;
-        const float texturePixelsPerUnit = 32;
-        const float textureWorldScale = 1 / texturePixelsPerUnit;
+        public const float TexturePixelsPerUnit = 32;
+        public const float TextureWorldScale = 1 / TexturePixelsPerUnit;
 
         private readonly GraphicsDevice graphics;
         private readonly SpriteBatch spriteBatch;
@@ -52,7 +52,7 @@ namespace Growth.Rendering
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, matrix);
             for (int i = 0; i < sprites.Count; i++)
             {
-                spriteBatch.Draw(sprites[i].Texture, sprites[i].Position, null, sprites[i].Tint, sprites[i].Rotation, sprites[i].Origin, textureWorldScale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(sprites[i].Texture, sprites[i].Position, null, sprites[i].Tint, sprites[i].Rotation, sprites[i].Origin, TextureWorldScale, SpriteEffects.None, 0f);
             }
 
             spriteBatch.End();

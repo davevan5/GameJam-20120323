@@ -61,7 +61,9 @@ namespace Growth.Physics
         }
 
         public void Update(double dt)
-        {            
+        {
+            collisionPairs.Clear();
+
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].Velocity += entities[i].Acceleration * (float)dt;

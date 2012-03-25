@@ -120,6 +120,7 @@ namespace Growth
             entityManager.Update(dt);
             physics.Update(dt);
             asteroidField.Update(dt);
+            targetPointer.Update();
 
             base.Update(gameTime);
         }

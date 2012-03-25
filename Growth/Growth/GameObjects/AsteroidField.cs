@@ -35,12 +35,19 @@ namespace Growth.GameObjects
                 RespawnAsteroid();
         }
 
+        private void OnAsteroidDestroyed(object sender, EventArgs e)
+        {
+            asteroids.Remove((Asteroid)sender);
+            ((Asteroid)sender).Destroyed -= OnAsteroidDestroyed;
+        }
+
         public void RespawnAsteroid()
         {
             if (asteroids.Count < MaxCount)
             {
                 Asteroid newAsteroid = (Asteroid)entityContructor.MakeEntity(typeof(Asteroid));
                 newAsteroid.Position = this.Position + new Vector2(rand.Next(3, 20), rand.Next(3, 20));
+                newAsteroid.Destroyed += OnAsteroidDestroyed;
                 asteroids.Add(newAsteroid);
 
                 timeSinceRespawn = 0;

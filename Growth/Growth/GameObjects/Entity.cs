@@ -42,6 +42,7 @@ namespace Growth.GameObjects
             get { return rotation; }
             set
             {
+                value = MathHelper.WrapAngle(value);
                 this.rotation = value;
                 Sprite.Rotation = value;
             }

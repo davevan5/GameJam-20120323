@@ -12,6 +12,7 @@ namespace Growth.GameObjects
         private const double Lifespan = 1;
         private double timeAlive;        
         public bool DoDispose;
+        public int Damage = 50;
 
         public Projectile(Sprite sprite)
             : base(sprite)
