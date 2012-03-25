@@ -8,7 +8,7 @@ namespace Growth.GameObjects.Entities
     {
         EntityConstructor entityContructor;
         private static Random rand = new Random();
-        private const int maxHealth = 500;
+        private const int maxHealth = 200;
         private const int explosiveFactor = 10;
         public int DropCount;
         public int Health;
