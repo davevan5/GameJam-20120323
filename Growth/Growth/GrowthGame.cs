@@ -22,6 +22,8 @@ namespace Growth
     /// </summary>
     public class GrowthGame : Microsoft.Xna.Framework.Game
     {
+        Song song;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;        
         MouseWorldInput mouseInput;
@@ -90,6 +92,11 @@ namespace Growth
             Sprite arrowSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Arrow"), new Vector2(16f, 16f));
             targetPointer = new TargetPointer(earth, playerShip, arrowSprite);
             renderer.AddSprite(arrowSprite);
+
+            song = Content.Load<Song>("Music\\bgmus01");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(song);
+            
         }
 
         protected override void UnloadContent()
