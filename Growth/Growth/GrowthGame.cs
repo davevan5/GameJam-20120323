@@ -32,11 +32,14 @@ namespace Growth
         StarFieldRenderer starFieldRenderer;
         TargetPointer targetPointer;
         AsteroidField asteroidField;
+        HudRenderer hudRenderer;
 
         Renderer renderer;
         EntityManager entityManager;
         EntityConstructor entityContructor;
         PhysicsSimulator physics;
+
+
 
         public GrowthGame()
         {
@@ -77,6 +80,9 @@ namespace Growth
             mouseInput = new MouseWorldInput(GraphicsDevice, cameraStack);
             physics = new PhysicsSimulator();
 
+            hudRenderer = new HudRenderer(GraphicsDevice, Content.Load<SpriteFont>("Fonts\\segment"));
+
+
             entityManager = new EntityManager(physics, renderer);
             entityContructor = new EntityConstructor(entityManager, Content, mouseInput);            
 
@@ -87,10 +93,13 @@ namespace Growth
 
             Planet earth = (Planet)entityContructor.MakeEntity(typeof(Planet));
             Ship playerShip =  (Ship)entityContructor.MakeEntity(typeof(Ship));
+            playerShip.Destroyed += OnPlayerShipDestroyed;
             playerShip.Position = new Vector2(10, 10);
             cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = playerShip });
             ShipBooster booster = (ShipBooster)entityContructor.MakeEntity(typeof(ShipBooster));
             booster.Player = playerShip;
+
+            hudRenderer.Ship = playerShip;
 
             Sprite arrowSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Arrow"), new Vector2(16f, 16f));
             arrowSprite.Tint = Color.Green;
@@ -105,6 +114,11 @@ namespace Growth
             asteroidField = new AsteroidField(entityContructor);
             asteroidField.MaxCount = 7;
             asteroidField.Position = new Vector2(30, 30);
+        }
+
+        private void OnPlayerShipDestroyed(object sender, EventArgs e)
+        {
+            hudRenderer.ShowGameOver = true;
         }
 
         protected override void UnloadContent()
@@ -135,6 +149,7 @@ namespace Growth
 
             starFieldRenderer.Render();
             renderer.Render();
+            hudRenderer.Render();
 
             base.Draw(gameTime);
         }

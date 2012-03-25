@@ -140,6 +140,7 @@
     <Compile Include="GrowthGame.cs" />
     <Compile Include="GameObjects\Entities\Ship.cs" />
     <Compile Include="Rendering\FrameSprite.cs" />
+    <Compile Include="Rendering\HudRenderer.cs" />
     <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\Sprite.cs" />
     <Compile Include="Rendering\StarFieldRenderer.cs" />
