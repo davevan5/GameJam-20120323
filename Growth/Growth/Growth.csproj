@@ -137,6 +137,7 @@
     <Compile Include="Input\MouseWorldInput.cs" />
     <Compile Include="Matricies.cs" />
     <Compile Include="Physics\PhysicsSimulator.cs" />
+    <Compile Include="PlayerStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GrowthGame.cs" />

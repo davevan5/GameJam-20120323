@@ -34,6 +34,8 @@ namespace Growth
         AsteroidField asteroidField;
         HudRenderer hudRenderer;
 
+        PlayerStats stats;
+
         Renderer renderer;
         EntityManager entityManager;
         EntityConstructor entityContructor;
@@ -82,9 +84,9 @@ namespace Growth
 
             hudRenderer = new HudRenderer(GraphicsDevice, Content.Load<SpriteFont>("Fonts\\segment"));
 
-
+            stats = new PlayerStats();
             entityManager = new EntityManager(physics, renderer);
-            entityContructor = new EntityConstructor(entityManager, Content, mouseInput);            
+            entityContructor = new EntityConstructor(entityManager, Content, mouseInput, stats);
 
             Sprite pointerSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Cross"), new Vector2(16f, 16f));
             MousePointer mousePointer = new MousePointer(pointerSprite, mouseInput);
@@ -100,6 +102,7 @@ namespace Growth
             booster.Player = playerShip;
 
             hudRenderer.Ship = playerShip;
+            hudRenderer.Stats = stats;
 
             Sprite arrowSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Arrow"), new Vector2(16f, 16f));
             arrowSprite.Tint = Color.Green;

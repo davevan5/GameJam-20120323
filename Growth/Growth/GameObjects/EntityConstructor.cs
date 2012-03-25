@@ -15,7 +15,7 @@ namespace Growth.GameObjects
         private Dictionary<Type, ITemplate> templates;
         private EntityManager entityManager;
 
-        public EntityConstructor(EntityManager entityManager, ContentManager content, MouseWorldInput mouseInput)
+        public EntityConstructor(EntityManager entityManager, ContentManager content, MouseWorldInput mouseInput, PlayerStats stats)
         {
             this.entityManager = entityManager;
 
@@ -25,9 +25,9 @@ namespace Growth.GameObjects
                 { typeof(ShipBooster), new BoosterTemplate(content) },
                 { typeof(Projectile), new ProjectileTemplate(this, content) },
                 { typeof(Planet), new PlanetTemplate(this, content) },
-                { typeof(Asteroid), new AsteroidTemplate(this, content) },
-                { typeof(Ore), new OreTemplate(this, content) },
-                { typeof(NpcEnemy), new NpcEnemyTemplate(this, content) },
+                { typeof(Asteroid), new AsteroidTemplate(this, content, stats) },
+                { typeof(Ore), new OreTemplate(this, content, stats) },
+                { typeof(NpcEnemy), new NpcEnemyTemplate(this, content, stats) },
             };
         }
 

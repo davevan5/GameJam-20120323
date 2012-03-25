@@ -27,12 +27,13 @@ namespace Growth.Rendering
         }
 
         public Ship Ship { get; set; }
+        public PlayerStats Stats { get; set; }
 
         public bool ShowGameOver { get; set; }
 
         public void Render()
         {
-            if (Ship == null)
+            if (Ship == null && Stats == null)
                 return;
 
             spriteBatch.Begin();
@@ -51,8 +52,11 @@ namespace Growth.Rendering
             }
             else
             {
-                spriteBatch.DrawString(font, string.Format("Score:  {0}", Ship.Score), new Vector2(10, 10), Color.White);
-                spriteBatch.DrawString(font, string.Format("Health: {0}", Ship.Health), new Vector2(10, font.LineSpacing), Color.White);
+                if (Stats != null)
+                    spriteBatch.DrawString(font, string.Format("Score:  {0}", Stats.Score), new Vector2(10, 10), Color.White);
+                
+                if (Ship != null)
+                    spriteBatch.DrawString(font, string.Format("Health: {0}", Ship.Health), new Vector2(10, font.LineSpacing), Color.White);
             }
 
             spriteBatch.End();

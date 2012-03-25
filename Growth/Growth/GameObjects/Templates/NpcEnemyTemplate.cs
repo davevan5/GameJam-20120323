@@ -11,9 +11,11 @@ namespace Growth.GameObjects.Templates
     {
         private ContentManager content;
         private EntityConstructor entityConstructor;
-
-        public NpcEnemyTemplate(EntityConstructor entityConstructor, ContentManager content)
+        private readonly PlayerStats stats;
+        
+        public NpcEnemyTemplate(EntityConstructor entityConstructor, ContentManager content, PlayerStats stats)
         {
+            this.stats = stats;
             this.content = content;
             this.entityConstructor = entityConstructor;
         }
@@ -21,7 +23,8 @@ namespace Growth.GameObjects.Templates
         public Entity Make()
         {
             Sprite npcSprite = new Sprite(content.Load<Texture2D>("Sprites\\NpcEnemy"), new Vector2(16f, 16f));
-            return new NpcEnemy(npcSprite, entityConstructor)
+
+            return new NpcEnemy(npcSprite, entityConstructor, stats)
             {
                 CanCollide = true,
                 IsPhysical = true,

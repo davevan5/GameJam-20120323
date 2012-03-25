@@ -7,11 +7,13 @@ namespace Growth.GameObjects.Entities
 {
     public class Ore : Entity
     {
-        //private int rotateDirection;
+        private const int ScoreReward = 10;
+        private readonly PlayerStats stats;
 
-        public Ore(Sprite sprite)
+        public Ore(Sprite sprite, PlayerStats stats)
             : base(sprite) 
         {
+            this.stats = stats;
             DragFactor = 0.95f;
         }
 
@@ -23,7 +25,10 @@ namespace Growth.GameObjects.Entities
         public override void CollisionWith(Entity collider)
         {
             if (collider is Ship)
+            {
+                stats.Score += ScoreReward;
                 OnDestroyed();
+            }
 
             base.CollisionWith(collider);
         }

@@ -5,11 +5,10 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Growth.GameObjects.Entities
 {
     public abstract class Entity
-    {
-        public Sprite Sprite;        
+    {        
+        public Sprite Sprite; 
         public Vector2 Velocity;
         public Vector2 Acceleration;
-
         public float MaxSpeed;
 
         // Collision

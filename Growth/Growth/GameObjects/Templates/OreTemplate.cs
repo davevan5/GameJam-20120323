@@ -13,12 +13,15 @@ namespace Growth.GameObjects.Templates
 {
     public class OreTemplate : ITemplate
     {
+        private readonly PlayerStats stats;
+        
         private ContentManager content;
         private EntityConstructor entityConstructor;
         private Random rand = new Random();
-
-        public OreTemplate(EntityConstructor entityConstructor, ContentManager content)
+                
+        public OreTemplate(EntityConstructor entityConstructor, ContentManager content, PlayerStats stats)
         {
+            this.stats = stats;
             this.content = content;
             this.entityConstructor = entityConstructor;
         }
@@ -30,10 +33,11 @@ namespace Growth.GameObjects.Templates
 
             float collisionRadius = (Math.Max(texture.Width, texture.Height) / Renderer.TexturePixelsPerUnit) / 2;
 
-            return new Ore(oreSprite)
+            return new Ore(oreSprite, stats)
             {
-                CanCollide = false,
-                IsPhysical = false
+                CanCollide = true,
+                IsPhysical = false,
+                CollisionRadius = 0.5f
             };
         }
     }

@@ -8,15 +8,22 @@ namespace Growth.GameObjects.Entities
 {
     public class NpcEnemy : Entity
     {
-        private EntityConstructor entityConstructor;
-        public Entity Target;
         public const int MaxHealth = 400;
         private const float AccelerationSpeed = 50f;
+        private const int ScoreReward = 200;
+
+        private readonly PlayerStats stats;
+
+        private readonly EntityConstructor entityConstructor;
+        
+        public Entity Target;
+        
         public int Health;
 
-        public NpcEnemy(Sprite sprite, EntityConstructor entityConstructor)
+        public NpcEnemy(Sprite sprite, EntityConstructor entityConstructor, PlayerStats stats)
             : base(sprite)
         {
+            this.stats = stats;
             DragFactor = 0.95f;
             Health = MaxHealth;
             MaxSpeed = 30f;
@@ -40,10 +47,19 @@ namespace Growth.GameObjects.Entities
             Rotation = (float)Math.Atan2(direction.Y, direction.X);
         }
 
+        protected override void OnDestroyed()
+        {
+            stats.Score += ScoreReward;
+
+            base.OnDestroyed();
+        }
+
         public override void CollisionWith(Entity collider)
         {
             if (collider is Projectile)
-                Health -= ((Projectile)collider).Damage;
+            {
+                Health -= ((Projectile)collider).Damage;                
+            }
 
             base.CollisionWith(collider);
         }

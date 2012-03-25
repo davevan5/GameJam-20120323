@@ -16,9 +16,11 @@ namespace Growth.GameObjects.Templates
         private ContentManager content;
         private EntityConstructor entityConstructor;
         private Random rand = new Random();
-
-        public AsteroidTemplate(EntityConstructor entityConstructor, ContentManager content)
+        private readonly PlayerStats stats;
+        
+        public AsteroidTemplate(EntityConstructor entityConstructor, ContentManager content, PlayerStats stats)
         {
+            this.stats = stats;
             this.content = content;
             this.entityConstructor = entityConstructor;
         }
@@ -30,7 +32,7 @@ namespace Growth.GameObjects.Templates
 
             float collisionRadius = (Math.Max(texture.Width, texture.Height) / Renderer.TexturePixelsPerUnit) / 2;
 
-            return new Asteroid(asteroidSprite, entityConstructor)
+            return new Asteroid(asteroidSprite, entityConstructor, stats)
             {
                 CanCollide = true,
                 CollisionRadius = collisionRadius,

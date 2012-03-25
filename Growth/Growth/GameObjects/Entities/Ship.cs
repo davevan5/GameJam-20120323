@@ -16,13 +16,14 @@ namespace Growth.GameObjects.Entities
         private const int RateOfFire = 7;
 
         public int Shield;
-        public int Health;
-        public int Score;
+        public int Health;        
 
         public Ship(Sprite sprite, EntityConstructor entityConstructor, MouseWorldInput mouseInput)
             : base(sprite)
         {
             DragFactor = 0.95f;
+
+            Health = 100;
 
             this.mouseInput = mouseInput;
             this.entityConstructor = entityConstructor;

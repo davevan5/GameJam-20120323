@@ -6,16 +6,24 @@ namespace Growth.GameObjects.Entities
 {
     public class Asteroid : Entity
     {
-        EntityConstructor entityContructor;
-        private static Random rand = new Random();
+        private const int ScoreReward = 100;        
         private const int maxHealth = 200;
         private const int explosiveFactor = 10;
+
+        private static Random rand = new Random();
+
+        private readonly PlayerStats stats;
+
+        EntityConstructor entityContructor;
+
         public int DropCount;
         public int Health;
-
-        public Asteroid(Sprite sprite, EntityConstructor entityContructor)
+        
+        
+        public Asteroid(Sprite sprite, EntityConstructor entityContructor, PlayerStats stats)
             : base(sprite)
         {
+            this.stats = stats;
             this.entityContructor = entityContructor;
             Health = maxHealth;
             DropCount = rand.Next(1, 5);
@@ -46,7 +54,9 @@ namespace Growth.GameObjects.Entities
                 newOre.Position = Position;
                 newOre.Velocity = new Vector2(((float)rand.NextDouble() * 2 - 1) * explosiveFactor, ((float)rand.NextDouble() * 2 - 1) * explosiveFactor);
             }
-            
+
+            stats.Score += ScoreReward;
+
             base.OnDestroyed();
         }
     }
