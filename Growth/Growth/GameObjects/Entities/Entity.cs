@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Growth.GameObjects
+namespace Growth.GameObjects.Entities
 {
     public abstract class Entity
     {

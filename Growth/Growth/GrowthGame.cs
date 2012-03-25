@@ -13,6 +13,7 @@ using Growth.GameObjects;
 using Growth.Input;
 using Growth.Cameras;
 using Growth.GameObjects.Templates;
+using Growth.GameObjects.Entities;
 using Growth.Physics;
 
 namespace Growth

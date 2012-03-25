@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Growth.Input;
 using Microsoft.Xna.Framework;
+using Growth.GameObjects.Entities;
 
 namespace Growth.GameObjects.Templates
 {

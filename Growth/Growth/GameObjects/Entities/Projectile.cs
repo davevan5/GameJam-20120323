@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Growth.GameObjects
+namespace Growth.GameObjects.Entities
 {
     public class Projectile : Entity
     {        

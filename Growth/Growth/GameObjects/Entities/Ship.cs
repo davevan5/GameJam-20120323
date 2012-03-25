@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Growth.Input;
 
-namespace Growth.GameObjects
+namespace Growth.GameObjects.Entities
 {
     public class Ship : Entity
     {

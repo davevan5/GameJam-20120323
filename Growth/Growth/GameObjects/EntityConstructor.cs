@@ -6,6 +6,7 @@ using Growth.GameObjects.Templates;
 using Microsoft.Xna.Framework.Content;
 using Growth.Input;
 using Growth.Rendering;
+using Growth.GameObjects.Entities;
 
 namespace Growth.GameObjects
 {

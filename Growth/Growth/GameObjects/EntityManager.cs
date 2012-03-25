@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Growth.Rendering;
 using Growth.Physics;
+using Growth.GameObjects.Entities;
 
 namespace Growth.GameObjects
 {

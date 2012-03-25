@@ -5,6 +5,7 @@ using System.Text;
 using Growth.GameObjects;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
+using Growth.GameObjects.Entities;
 
 namespace Growth.Physics
 {        
