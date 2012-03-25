@@ -14,17 +14,17 @@ namespace Growth.GameObjects.Entities
 
         private readonly PlayerStats stats;
 
-        EntityConstructor entityContructor;
+        EntityConstructor entityConstructor;
 
         public int DropCount;
         public int Health;
         
         
-        public Asteroid(Sprite sprite, EntityConstructor entityContructor, PlayerStats stats)
+        public Asteroid(Sprite sprite, EntityConstructor entityConstructor, PlayerStats stats)
             : base(sprite)
         {
             this.stats = stats;
-            this.entityContructor = entityContructor;
+            this.entityConstructor = entityConstructor;
             Health = maxHealth;
             DropCount = rand.Next(1, 5);
         }
@@ -50,7 +50,7 @@ namespace Growth.GameObjects.Entities
             int maxDropDistance = (int)(CollisionRadius * 2);
             for (int i = 0; i < DropCount; i++)
             {
-                Ore newOre = (Ore)entityContructor.MakeEntity(typeof(Ore));
+                Ore newOre = (Ore)entityConstructor.MakeEntity(typeof(Ore));
                 newOre.Position = Position;
                 newOre.Velocity = new Vector2(((float)rand.NextDouble() * 2 - 1) * explosiveFactor, ((float)rand.NextDouble() * 2 - 1) * explosiveFactor);
             }

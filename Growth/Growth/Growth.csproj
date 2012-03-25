@@ -115,7 +115,7 @@
     <Compile Include="Cameras\FollowCamera.cs" />
     <Compile Include="Cameras\NullCamera.cs" />
     <Compile Include="GameObjects\Entities\Asteroid.cs" />
-    <Compile Include="GameObjects\AsteroidField.cs" />
+    <Compile Include="GameObjects\Spawners\AsteroidField.cs" />
     <Compile Include="GameObjects\Entities\NpcEnemy.cs" />
     <Compile Include="GameObjects\Entities\Ore.cs" />
     <Compile Include="GameObjects\EntityConstructor.cs" />
@@ -125,6 +125,8 @@
     <Compile Include="GameObjects\Entities\Planet.cs" />
     <Compile Include="GameObjects\Entities\Projectile.cs" />
     <Compile Include="GameObjects\ShipBooster.cs" />
+    <Compile Include="GameObjects\Spawners\NpcSpawner.cs" />
+    <Compile Include="GameObjects\Spawners\Spawner.cs" />
     <Compile Include="GameObjects\TargetPointer.cs" />
     <Compile Include="GameObjects\Templates\AsteroidTemplate.cs" />
     <Compile Include="GameObjects\Templates\NpcEnemyTemplate.cs" />

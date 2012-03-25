@@ -15,6 +15,7 @@ using Growth.Cameras;
 using Growth.GameObjects.Templates;
 using Growth.GameObjects.Entities;
 using Growth.Physics;
+using Growth.GameObjects.Spawners;
 
 namespace Growth
 {
@@ -32,13 +33,14 @@ namespace Growth
         StarFieldRenderer starFieldRenderer;
         TargetPointer targetPointer;
         AsteroidField asteroidField;
+        NpcSpawner npcSpawner;
         HudRenderer hudRenderer;
 
         PlayerStats stats;
 
         Renderer renderer;
         EntityManager entityManager;
-        EntityConstructor entityContructor;
+        EntityConstructor entityConstructor;
         PhysicsSimulator physics;
 
 
@@ -86,19 +88,19 @@ namespace Growth
 
             stats = new PlayerStats();
             entityManager = new EntityManager(physics, renderer);
-            entityContructor = new EntityConstructor(entityManager, Content, mouseInput, stats);
+            entityConstructor = new EntityConstructor(entityManager, Content, mouseInput, stats);
 
             Sprite pointerSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Cross"), new Vector2(16f, 16f));
             MousePointer mousePointer = new MousePointer(pointerSprite, mouseInput);
             entityManager.AddEntity(mousePointer);
             renderer.AddSprite(mousePointer.Sprite);            
 
-            Planet earth = (Planet)entityContructor.MakeEntity(typeof(Planet));
-            Ship playerShip =  (Ship)entityContructor.MakeEntity(typeof(Ship));
+            Planet earth = (Planet)entityConstructor.MakeEntity(typeof(Planet));
+            Ship playerShip =  (Ship)entityConstructor.MakeEntity(typeof(Ship));
             playerShip.Destroyed += OnPlayerShipDestroyed;
             playerShip.Position = new Vector2(10, 10);
             cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = playerShip });
-            ShipBooster booster = (ShipBooster)entityContructor.MakeEntity(typeof(ShipBooster));
+            ShipBooster booster = (ShipBooster)entityConstructor.MakeEntity(typeof(ShipBooster));
             booster.Player = playerShip;
 
             hudRenderer.Ship = playerShip;
@@ -111,16 +113,16 @@ namespace Growth
 
             song = Content.Load<Song>("Music\\bgmus01");
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(song);
-            
+            MediaPlayer.Play(song);            
 
-            asteroidField = new AsteroidField(entityContructor);
-            asteroidField.MaxCount = 7;
+            asteroidField = new AsteroidField(entityConstructor);
+            asteroidField.MaxSpawnCount = 7;
             asteroidField.Position = new Vector2(30, 30);
 
-            NpcEnemy npc = (NpcEnemy)entityContructor.MakeEntity(typeof(NpcEnemy));
-            npc.Target = playerShip;
-            npc.Position = new Vector2(20, 20); ;
+            npcSpawner = new NpcSpawner(entityConstructor, playerShip);
+            npcSpawner.MaxSpawnCount = 50;
+            npcSpawner.RespawnTime = 1;
+            npcSpawner.Position = new Vector2(20, 20);
         }
 
         private void OnPlayerShipDestroyed(object sender, EventArgs e)
@@ -145,6 +147,7 @@ namespace Growth
             entityManager.Update(dt);
             
             asteroidField.Update(dt);
+            npcSpawner.Update(dt);
             targetPointer.Update();
 
             base.Update(gameTime);

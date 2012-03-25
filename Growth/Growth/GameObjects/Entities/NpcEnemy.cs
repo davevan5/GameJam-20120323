@@ -8,6 +8,7 @@ namespace Growth.GameObjects.Entities
 {
     public class NpcEnemy : Entity
     {
+        private static Random rand = new Random();
         public const int MaxHealth = 400;
         private const float AccelerationSpeed = 50f;
         private const int ScoreReward = 200;
@@ -19,6 +20,8 @@ namespace Growth.GameObjects.Entities
         public Entity Target;
         
         public int Health;
+        private const int explosiveFactor = 10;
+        public int DropCount;
 
         public NpcEnemy(Sprite sprite, EntityConstructor entityConstructor, PlayerStats stats)
             : base(sprite)
@@ -47,13 +50,6 @@ namespace Growth.GameObjects.Entities
             Rotation = (float)Math.Atan2(direction.Y, direction.X);
         }
 
-        protected override void OnDestroyed()
-        {
-            stats.Score += ScoreReward;
-
-            base.OnDestroyed();
-        }
-
         public override void CollisionWith(Entity collider)
         {
             if (collider is Projectile)
@@ -62,6 +58,21 @@ namespace Growth.GameObjects.Entities
             }
 
             base.CollisionWith(collider);
+        }
+
+        protected override void OnDestroyed()
+        {
+            stats.Score += ScoreReward;
+
+            int maxDropDistance = (int)(CollisionRadius * 2);
+            for (int i = 0; i < DropCount; i++)
+            {
+                Ore newOre = (Ore)entityConstructor.MakeEntity(typeof(Ore));
+                newOre.Position = Position;
+                newOre.Velocity = new Vector2(((float)rand.NextDouble() * 2 - 1) * explosiveFactor, ((float)rand.NextDouble() * 2 - 1) * explosiveFactor);
+            }
+
+            base.OnDestroyed();
         }
     }
 }

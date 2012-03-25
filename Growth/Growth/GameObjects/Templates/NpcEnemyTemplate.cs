@@ -26,6 +26,7 @@ namespace Growth.GameObjects.Templates
 
             return new NpcEnemy(npcSprite, entityConstructor, stats)
             {
+                DropCount = 2,
                 CanCollide = true,
                 IsPhysical = true,
                 CollisionRadius = 0.6f

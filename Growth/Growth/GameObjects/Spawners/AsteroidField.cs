@@ -6,22 +6,15 @@ using Microsoft.Xna.Framework;
 using Growth.GameObjects.Entities;
 using Growth.Rendering;
 
-namespace Growth.GameObjects
+namespace Growth.GameObjects.Spawners
 {
-    public class AsteroidField
+    public class AsteroidField : Spawner
     {
-        EntityConstructor entityContructor;
         private List<Asteroid> asteroids;
-        private const double Respawn = 10;
-        private double timeSinceRespawn;
 
-        public int MaxCount;
-        public Vector2 Position;
-        private static Random rand = new Random();
-
-        public AsteroidField(EntityConstructor entityContructor) 
+        public AsteroidField(EntityConstructor entityConstructor)
+            : base(entityConstructor)
         {
-            this.entityContructor = entityContructor;
             this.asteroids = new List<Asteroid>();
         }
 
@@ -32,9 +25,9 @@ namespace Growth.GameObjects
                 asteroids[i].Update(dt);
             }
 
-            timeSinceRespawn += dt;
-            if (timeSinceRespawn >= Respawn)
-                RespawnAsteroid();
+            TimeSinceRespawn += dt;
+            if (TimeSinceRespawn >= RespawnTime)
+                Spawn();
         }
 
         private void OnAsteroidDestroyed(object sender, EventArgs e)
@@ -45,16 +38,16 @@ namespace Growth.GameObjects
             (thisAsteroid).Destroyed -= OnAsteroidDestroyed;
         }
 
-        public void RespawnAsteroid()
+        public void Spawn()
         {
-            if (asteroids.Count < MaxCount)
+            if (asteroids.Count < MaxSpawnCount)
             {
-                Asteroid newAsteroid = (Asteroid)entityContructor.MakeEntity(typeof(Asteroid));
+                Asteroid newAsteroid = (Asteroid)EntityConstructor.MakeEntity(typeof(Asteroid));
                 newAsteroid.Position = this.Position + new Vector2(rand.Next(3, 20), rand.Next(3, 20));
                 newAsteroid.Destroyed += OnAsteroidDestroyed;
                 asteroids.Add(newAsteroid);
 
-                timeSinceRespawn = 0;
+                TimeSinceRespawn = 0;
             }
         }
     }
