@@ -31,6 +31,9 @@ namespace Growth.GameObjects.Entities
 
         public override void Update(double dt)
         {
+            if (Health <= 0)
+                OnDestroyed();
+
             Move(dt);
             SetFacing(GetMouseDirection());            
 
