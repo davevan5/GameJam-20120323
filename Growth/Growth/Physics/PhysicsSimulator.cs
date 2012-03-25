@@ -10,6 +10,8 @@ namespace Growth.Physics
 {        
     public class PhysicsSimulator
     {
+        const float Epsilon = 0.0005f;
+
         struct CollisionPair
         {
             public Entity A;
@@ -64,6 +66,10 @@ namespace Growth.Physics
             {
                 entities[i].Velocity += entities[i].Acceleration * (float)dt;
                 entities[i].Velocity *= entities[i].DragFactor;
+
+                entities[i].Velocity = new Vector2(
+                    Math.Abs(entities[i].Velocity.X) < Epsilon ? 0 : entities[i].Velocity.X,
+                    Math.Abs(entities[i].Velocity.Y) < Epsilon ? 0 : entities[i].Velocity.Y);
             }
 
             BroadPhase();
