@@ -52,7 +52,7 @@ namespace Growth.Rendering
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, matrix);
             for (int i = 0; i < sprites.Count; i++)
             {
-                spriteBatch.Draw(sprites[i].Texture, sprites[i].Position, null, sprites[i].Tint, sprites[i].Rotation, sprites[i].Origin, TextureWorldScale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(sprites[i].Texture, sprites[i].Position, sprites[i].SourceRectangle, sprites[i].Tint, sprites[i].Rotation, sprites[i].Origin, TextureWorldScale, SpriteEffects.None, 0f);
             }
 
             spriteBatch.End();

@@ -12,10 +12,12 @@ namespace Growth.Rendering
     public class Renderer
     {
         private readonly CameraStack cameraStack;
-        const float texturePixelsPerUnit = 32;
+        public const float TexturePixelsPerUnit = 32;
+        public const float TextureWorldScale = 1 / TexturePixelsPerUnit;
 
         private readonly GraphicsDevice graphics;
         private readonly SpriteBatch spriteBatch;
+        private readonly List<Sprite> sprites;
 
         public Renderer(GraphicsDevice graphics, CameraStack cameraStack)
         {
@@ -27,30 +29,42 @@ namespace Growth.Rendering
             this.cameraStack = cameraStack;
             this.graphics = graphics;
             this.spriteBatch = new SpriteBatch(graphics);
+            this.sprites = new List<Sprite>();
         }
 
-        public Ship Ship { get; set; }
-        public Crosshair Crosshair { get; set; }
+        public void AddSprite(Sprite newSprite)
+        {
+            this.sprites.Add(newSprite);
+        }
+
+        public void ClearSprites()
+        {
+            this.sprites.Clear();
+        }
 
         public void Render()
         {
-            if (Ship == null)
+            if (this.sprites.Count == 0)
                 return;
 
-<<<<<<< Updated upstream
             Matrix matrix = cameraStack.Current.GetViewMatrix();            
-=======
-            if (Crosshair == null)
-                return;
-
-            Matrix matrix;
-            Matricies.GetWorldToViewMatrix(graphics.Viewport, out matrix);
->>>>>>> Stashed changes
 
             spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, null, null, null, null, matrix);
-            spriteBatch.Draw(Ship.Texture, Ship.Position, null, Color.White, Ship.Rotation, Ship.Origin, 1 / texturePixelsPerUnit, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Crosshair.Texture, Crosshair.Position, null, Color.White, Crosshair.Rotation, Vector2.Zero, 1 / texturePixelsPerUnit, SpriteEffects.None, 0f);
+            for (int i = 0; i < sprites.Count; i++)
+            {
+<<<<<<< HEAD
+                spriteBatch.Draw(sprites[i].Texture, sprites[i].Position, null, sprites[i].Tint, sprites[i].Rotation, sprites[i].Origin, TextureWorldScale, SpriteEffects.None, 0f);
+=======
+                spriteBatch.Draw(sprites[i].Texture, sprites[i].Position, sprites[i].SourceRectangle, sprites[i].Tint, sprites[i].Rotation, sprites[i].Origin, textureWorldScale, SpriteEffects.None, 0f);
+>>>>>>> Added animations and ship booster
+            }
+
             spriteBatch.End();
+        }
+
+        public void RemoveSprite(Sprite sprite)
+        {
+            sprites.Remove(sprite);
         }
     }
 }

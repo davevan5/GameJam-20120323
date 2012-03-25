@@ -47,8 +47,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sprites\Cross.png">
       <Name>Cross</Name>
       <Importer>TextureImporter</Importer>
@@ -133,6 +131,12 @@
       <Name>Ore1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\blasterSheet.png">
+      <Name>blasterSheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ColorKeyColor>76, 178, 44, 255</ProcessorParameters_ColorKeyColor>
     </Compile>
     <Compile Include="Sprites\Ore2.png">
       <Name>Ore2</Name>

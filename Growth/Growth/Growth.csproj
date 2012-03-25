@@ -107,6 +107,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animations\Animation.cs" />
+    <Compile Include="Animations\AnimationController.cs" />
+    <Compile Include="Animations\IAnimatable.cs" />
     <Compile Include="Cameras\Camera.cs" />
     <Compile Include="Cameras\CameraStack.cs" />
     <Compile Include="Cameras\FollowCamera.cs" />
@@ -120,9 +123,11 @@
     <Compile Include="GameObjects\Entities\Entity.cs" />
     <Compile Include="GameObjects\Entities\Planet.cs" />
     <Compile Include="GameObjects\Entities\Projectile.cs" />
+    <Compile Include="GameObjects\ShipBooster.cs" />
     <Compile Include="GameObjects\TargetPointer.cs" />
     <Compile Include="GameObjects\Templates\AsteroidTemplate.cs" />
     <Compile Include="GameObjects\Templates\OreTemplate.cs" />
+    <Compile Include="GameObjects\Templates\BoosterTemplate.cs" />
     <Compile Include="GameObjects\Templates\PlanetTemplate.cs" />
     <Compile Include="GameObjects\Templates\ITemplate.cs" />
     <Compile Include="GameObjects\Templates\ProjectileTemplate.cs" />
@@ -134,9 +139,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="GrowthGame.cs" />
     <Compile Include="GameObjects\Entities\Ship.cs" />
+    <Compile Include="Rendering\FrameSprite.cs" />
     <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\Sprite.cs" />
     <Compile Include="Rendering\StarFieldRenderer.cs" />
+    <Compile Include="Vector2Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

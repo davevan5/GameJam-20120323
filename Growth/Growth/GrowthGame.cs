@@ -89,6 +89,8 @@ namespace Growth
             Ship playerShip =  (Ship)entityContructor.MakeEntity(typeof(Ship));
             playerShip.Position = new Vector2(10, 10);
             cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = playerShip });
+            ShipBooster booster = (ShipBooster)entityContructor.MakeEntity(typeof(ShipBooster));
+            booster.Player = playerShip;
 
             Sprite arrowSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Arrow"), new Vector2(16f, 16f));
             arrowSprite.Tint = Color.Green;
@@ -118,8 +120,9 @@ namespace Growth
 
             double dt = gameTime.ElapsedGameTime.TotalSeconds;
             cameraStack.Update(dt);
-            entityManager.Update(dt);
             physics.Update(dt);
+            entityManager.Update(dt);
+            
             asteroidField.Update(dt);
             targetPointer.Update();
 

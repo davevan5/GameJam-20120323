@@ -22,6 +22,7 @@ namespace Growth.GameObjects
             templates = new Dictionary<Type, ITemplate>()
             {
                 { typeof(Ship), new ShipTemplate(this, content, mouseInput) },
+                { typeof(ShipBooster), new BoosterTemplate(content) },
                 { typeof(Projectile), new ProjectileTemplate(this, content) },
                 { typeof(Planet), new PlanetTemplate(this, content) },
                 { typeof(Asteroid), new AsteroidTemplate(this, content) },
