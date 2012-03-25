@@ -12,13 +12,11 @@ namespace Growth.GameObjects.Templates
     public class PlanetTemplate : ITemplate
     {
         private ContentManager content;
-        private MouseWorldInput mouseInput;
         private EntityConstructor entityConstructor;
 
-        public PlanetTemplate(EntityConstructor entityConstructor, ContentManager content, MouseWorldInput mouseInput)
+        public PlanetTemplate(EntityConstructor entityConstructor, ContentManager content)
         {
             this.content = content;
-            this.mouseInput = mouseInput;
             this.entityConstructor = entityConstructor;
         }
 

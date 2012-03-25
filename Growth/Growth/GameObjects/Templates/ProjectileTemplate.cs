@@ -12,13 +12,11 @@ namespace Growth.GameObjects.Templates
     public class ProjectileTemplate : ITemplate
     {
         private ContentManager content;
-        private MouseWorldInput mouseInput;
         private EntityConstructor entityConstructor;
 
-        public ProjectileTemplate(EntityConstructor entityConstructor, ContentManager content, MouseWorldInput mouseInput)
+        public ProjectileTemplate(EntityConstructor entityConstructor, ContentManager content)
         {
             this.content = content;
-            this.mouseInput = mouseInput;
             this.entityConstructor = entityConstructor;
         }
 

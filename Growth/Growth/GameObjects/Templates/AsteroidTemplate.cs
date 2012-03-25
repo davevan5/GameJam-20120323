@@ -13,14 +13,12 @@ namespace Growth.GameObjects.Templates
     public class AsteroidTemplate : ITemplate
     {
         private ContentManager content;
-        private MouseWorldInput mouseInput;
         private EntityConstructor entityConstructor;
         private Random rand = new Random();
 
-        public AsteroidTemplate(EntityConstructor entityConstructor, ContentManager content, MouseWorldInput mouseInput)
+        public AsteroidTemplate(EntityConstructor entityConstructor, ContentManager content)
         {
             this.content = content;
-            this.mouseInput = mouseInput;
             this.entityConstructor = entityConstructor;
         }
 
