@@ -27,6 +27,7 @@ namespace Growth
         MouseWorldInput mouseInput;
         CameraStack cameraStack;
         StarFieldRenderer starFieldRenderer;
+        TargetPointer targetPointer;
 
 
         Renderer renderer;
@@ -79,10 +80,16 @@ namespace Growth
             entityManager.AddEntity(mousePointer);
             renderer.AddSprite(mousePointer.Sprite);
 
+            
+
             Planet earth = (Planet)entityContructor.MakeEntity(typeof(Planet));
             Ship playerShip =  (Ship)entityContructor.MakeEntity(typeof(Ship));
             playerShip.Position = new Vector2(20, 20);
-            cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = playerShip });            
+            cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = playerShip });
+
+            Sprite arrowSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Arrow"), new Vector2(16f, 16f));
+            targetPointer = new TargetPointer(earth, playerShip, arrowSprite);
+            renderer.AddSprite(arrowSprite);
         }
 
         protected override void UnloadContent()
@@ -99,6 +106,7 @@ namespace Growth
             cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);
             entityManager.Update(gameTime.ElapsedGameTime.TotalSeconds);
             physics.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            targetPointer.Update();
 
             base.Update(gameTime);
         }

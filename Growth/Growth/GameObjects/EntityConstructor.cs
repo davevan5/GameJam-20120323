@@ -22,7 +22,8 @@ namespace Growth.GameObjects
             {
                 { typeof(Ship), new ShipTemplate(this, content, mouseInput) },
                 { typeof(Projectile), new ProjectileTemplate(this, content, mouseInput) },
-                { typeof(Planet), new PlanetTemplate(this, content, mouseInput) }
+                { typeof(Planet), new PlanetTemplate(this, content, mouseInput) },
+                { typeof(Asteroid), new AsteroidTemplate(this, content, mouseInput) }
             };
         }
 

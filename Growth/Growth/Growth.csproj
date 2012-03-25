@@ -118,6 +118,8 @@
     <Compile Include="GameObjects\Entity.cs" />
     <Compile Include="GameObjects\Planet.cs" />
     <Compile Include="GameObjects\Projectile.cs" />
+    <Compile Include="GameObjects\TargetPointer.cs" />
+    <Compile Include="GameObjects\Templates\AsteroidTemplate.cs" />
     <Compile Include="GameObjects\Templates\PlanetTemplate.cs" />
     <Compile Include="GameObjects\Templates\ITemplate.cs" />
     <Compile Include="GameObjects\Templates\ProjectileTemplate.cs" />
