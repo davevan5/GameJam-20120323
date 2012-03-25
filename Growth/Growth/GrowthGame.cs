@@ -120,12 +120,6 @@ namespace Growth
             entityManager.Update(dt);
             physics.Update(dt);
             asteroidField.Update(dt);
-            
-            
-            entityManager.Update(gameTime.ElapsedGameTime.TotalSeconds);
-            physics.Update(gameTime.ElapsedGameTime.TotalSeconds);
-            targetPointer.Update();
-            cameraStack.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
         }
