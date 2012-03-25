@@ -14,7 +14,7 @@ namespace Growth.GameObjects
 
         public override void Update(double dt)
         {
-
+            //Sprite.Rotation = this.Rotation = 
         }
     }
 }

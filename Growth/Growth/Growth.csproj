@@ -112,6 +112,7 @@
     <Compile Include="Cameras\FollowCamera.cs" />
     <Compile Include="Cameras\NullCamera.cs" />
     <Compile Include="GameObjects\Asteroid.cs" />
+    <Compile Include="GameObjects\AsteroidField.cs" />
     <Compile Include="GameObjects\EntityConstructor.cs" />
     <Compile Include="GameObjects\EntityManager.cs" />
     <Compile Include="GameObjects\MousePointer.cs" />

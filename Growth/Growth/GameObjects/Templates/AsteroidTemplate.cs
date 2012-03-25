@@ -14,6 +14,7 @@ namespace Growth.GameObjects.Templates
         private ContentManager content;
         private MouseWorldInput mouseInput;
         private EntityConstructor entityConstructor;
+        private Random rand = new Random();
 
         public AsteroidTemplate(EntityConstructor entityConstructor, ContentManager content, MouseWorldInput mouseInput)
         {
@@ -24,8 +25,13 @@ namespace Growth.GameObjects.Templates
 
         public Entity Make()
         {
-            Sprite asteroidSprite = new Sprite(content.Load<Texture2D>("Sprites\\Asteroid1"), new Vector2(16f, 16f));
-            return new Asteroid(asteroidSprite);
+            Texture2D texture = content.Load<Texture2D>("Sprites\\Asteroid" + rand.Next(1, 3));
+            Sprite asteroidSprite = new Sprite(texture, new Vector2(texture.Width / 2, texture.Height / 2));
+            return new Asteroid(asteroidSprite)
+            {
+                CanCollide = true,
+                CollisionRadius = 0.6f
+            };
         }
     }
 }

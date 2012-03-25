@@ -30,7 +30,7 @@ namespace Growth
         CameraStack cameraStack;
         StarFieldRenderer starFieldRenderer;
         TargetPointer targetPointer;
-
+        AsteroidField asteroidField;
 
         Renderer renderer;
         EntityManager entityManager;
@@ -72,21 +72,21 @@ namespace Growth
             cameraStack = new CameraStack(new NullCamera(GraphicsDevice));
             starFieldRenderer = new StarFieldRenderer(GraphicsDevice, cameraStack, LoadStarTextures());
             renderer = new Renderer(GraphicsDevice, cameraStack);
+
             mouseInput = new MouseWorldInput(GraphicsDevice, cameraStack);
             physics = new PhysicsSimulator();
+
             entityManager = new EntityManager(physics, renderer);
             entityContructor = new EntityConstructor(entityManager, Content, mouseInput);            
 
             Sprite pointerSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Cross"), new Vector2(16f, 16f));
             MousePointer mousePointer = new MousePointer(pointerSprite, mouseInput);
             entityManager.AddEntity(mousePointer);
-            renderer.AddSprite(mousePointer.Sprite);
-
-            
+            renderer.AddSprite(mousePointer.Sprite);            
 
             Planet earth = (Planet)entityContructor.MakeEntity(typeof(Planet));
             Ship playerShip =  (Ship)entityContructor.MakeEntity(typeof(Ship));
-            playerShip.Position = new Vector2(20, 20);
+            playerShip.Position = new Vector2(10, 10);
             cameraStack.PushCamera(new FollowCamera(GraphicsDevice) { Ship = playerShip });
 
             Sprite arrowSprite = new Sprite(Content.Load<Texture2D>("Sprites\\Arrow"), new Vector2(16f, 16f));
@@ -97,6 +97,10 @@ namespace Growth
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(song);
             
+
+            asteroidField = new AsteroidField(entityContructor);
+            asteroidField.MaxCount = 7;
+            asteroidField.Position = new Vector2(30, 30);
         }
 
         protected override void UnloadContent()
@@ -109,6 +113,12 @@ namespace Growth
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            double dt = gameTime.ElapsedGameTime.TotalSeconds;
+            cameraStack.Update(dt);
+            entityManager.Update(dt);
+            physics.Update(dt);
+            asteroidField.Update(dt);
             
             
             entityManager.Update(gameTime.ElapsedGameTime.TotalSeconds);
